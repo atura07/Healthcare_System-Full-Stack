@@ -1,0 +1,28 @@
+import { Router } from "express";
+import { 
+    registerDoctor, 
+    loginDoctor, 
+    getDoctorProfile, 
+    updateDoctorProfile,
+    getAllDoctors
+} from "../controllers/Doctor.controllers.js";
+
+
+import { upload } from "../middleware/multer.middleware.js";
+
+const router = new Router(); 
+
+
+router.route("/register").post(
+    upload.single("avatar"), 
+    registerDoctor
+);
+
+// Other routes for the doctor
+router.route("/login").post(loginDoctor);
+router.route("/profile").get(getDoctorProfile);
+router.route("/profile/update").put(updateDoctorProfile);
+router.route("/all").get(getAllDoctors);
+
+export default router;
+
